@@ -1,13 +1,12 @@
-version: '3.8'
 services:
   test-app:
-    image: nginx:alpine
+    image: httpd:alpine                    # ← Apache HTTP Server
     container_name: test-app
     restart: unless-stopped
     ports:
       - "8080:80"
-    # volumes:
-    #   - ./:/usr/share/nginx/html:ro
+    volumes:
+      - ./:/usr/local/apache2/htdocs:ro   # ← Directorio de Apache
     environment:
       - DEPLOY_TIMESTAMP=${DEPLOY_TIMESTAMP}
       - GITHUB_SHA=${GITHUB_SHA}
@@ -22,7 +21,3 @@ services:
       - "traefik.http.routers.test-app.tls=true"
       - "traefik.http.routers.test-app.tls.certresolver=letsencrypt"
       - "traefik.http.services.test-app.loadbalancer.server.port=80"
-
-networks:
-  traefik_net:
-    external: true
