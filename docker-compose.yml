@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./:/usr/share/nginx/html/index.html:ro
     environment:
       - DEPLOY_TIMESTAMP=${DEPLOY_TIMESTAMP}
       - GITHUB_SHA=${GITHUB_SHA}
