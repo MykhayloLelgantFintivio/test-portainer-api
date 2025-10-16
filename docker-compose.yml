@@ -4,8 +4,6 @@ services:
     image: nginx:alpine
     container_name: test-app
     restart: unless-stopped
-    # ports:
-    #   - "8080:80"
     # volumes:
     #   - ./:/usr/share/nginx/html:ro
     environment:
@@ -14,13 +12,12 @@ services:
       - GITHUB_ACTOR=${GITHUB_ACTOR}
       - DEPLOY_STATUS=${DEPLOY_STATUS}
     networks:
-      - traefik_net
+      - traefik_net  
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.test-app.rule=Host(`test-app.staging.dicoded.vegarislabs.com`)"
-      - "traefik.http.routers.test-app.entrypoints=web,websecure"
-      - "traefik.http.routers.test-app.tls=true"
-      - "traefik.http.routers.test-app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.test-app.entrypoints=websecure"
+      - "traefik.http.routers.test-app.tls.certresolver=leresolver"
       - "traefik.http.services.test-app.loadbalancer.server.port=80"
 
 networks:
