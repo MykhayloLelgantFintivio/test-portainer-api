@@ -1,0 +1,31 @@
+name: Deploy to Staging
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 'Deploy to Portainer'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+      
+      - name: 'Portainer Deploy'
+        uses: cssnr/portainer-stack-deploy-action@v1
+        with:
+          name: 'test-app'
+          file: 'docker-compose.yml'
+          url: ${{ secrets.PORTAINER_URL }}
+          token: ${{ secrets.PORTAINER_TOKEN }}
+          type: 'file'
+          env_json: |
+            {
+              "DEPLOY_TIMESTAMP": "${{ github.run_number }}",
+              "GITHUB_SHA": "${{ github.sha }}",
+              "GITHUB_ACTOR": "${{ github.actor }}",
+              "DEPLOY_STATUS": "SUCCESS"
+            }

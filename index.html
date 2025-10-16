@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Deploy - Portainer API</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .status {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 255, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        .info {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+        }
+        .variables {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .variable {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .variable-name {
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .variable-value {
+            font-family: monospace;
+            color: #87ceeb;
+        }
+        .timestamp {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Test Deploy</h1>
+        <div class="status">✅ Deploy Exitoso</div>
+        <p class="info">
+            Esta es una aplicación de prueba para verificar el deploy automático<br>
+            usando Portainer API con variables de entorno.
+        </p>
+        
+        <div class="variables">
+            <h3>📊 Variables de Deploy</h3>
+            <div class="variable">
+                <span class="variable-name">Deploy #:</span>
+                <span class="variable-value" id="deploy-timestamp">Loading...</span>
+            </div>
+            <div class="variable">
+                <span class="variable-name">Git SHA:</span>
+                <span class="variable-value" id="github-sha">Loading...</span>
+            </div>
+            <div class="variable">
+                <span class="variable-name">Deployer:</span>
+                <span class="variable-value" id="github-actor">Loading...</span>
+            </div>
+            <div class="variable">
+                <span class="variable-name">Status:</span>
+                <span class="variable-value" id="deploy-status">Loading...</span>
+            </div>
+        </div>
+        
+        <p class="timestamp">
+            <strong>Deploy Time:</strong> <span id="current-time"></span>
+        </p>
+    </div>
+    
+    <script>
+        // Simular variables de entorno para demo
+        // En producción, estas vendrían del servidor
+        document.getElementById('deploy-timestamp').textContent = '#' + (Math.floor(Math.random() * 100) + 1);
+        document.getElementById('github-sha').textContent = 'abc123...' + Math.random().toString(36).substr(2, 6);
+        document.getElementById('github-actor').textContent = 'github-user';
+        document.getElementById('deploy-status').textContent = 'SUCCESS';
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
